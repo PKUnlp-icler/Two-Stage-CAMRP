@@ -221,4 +221,11 @@ python Align-smatch.py -lf ../data/test/test_A/max_len_testA.txt -f ../../result
 
 ## 📕引用我们的工作
 
-马上到来~
+```
+@misc{Chen2022ATM,
+  title={A Two-Stage Method for Chinese AMR Parsing},
+  author={Liang Chen and Bofei Gao and Baobao Chang},
+  year={2022},
+  journal = {arXiv}
+}
+```
