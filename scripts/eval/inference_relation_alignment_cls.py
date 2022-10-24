@@ -145,7 +145,7 @@ def build_train_dev_dataset_4level_no_r(train,dev):
     train_dataset = load_dataset(train+".4level.relations_nodes",train+".4level.relations.no_r")
     return DatasetDict({"train":train_dataset,"dev":dev_dataset})
 
-dataset = build_train_dev_dataset_ralign_classification("/home/cl/ATP/amrlib/amrlib/models/Unified_Parsing/CAMR/Tagging/datasets/0817_ralign_classification/train","/home/cl/ATP/amrlib/amrlib/models/Unified_Parsing/CAMR/Tagging/datasets/0817_ralign_classification/dev")
+#dataset = build_train_dev_dataset_ralign_classification("/home/cl/ATP/amrlib/amrlib/models/Unified_Parsing/CAMR/Tagging/datasets/0817_ralign_classification/train","/home/cl/ATP/amrlib/amrlib/models/Unified_Parsing/CAMR/Tagging/datasets/0817_ralign_classification/dev")
 #dataset = build_train_dev_dataset_4level("/home/cl/ATP/amrlib/amrlib/models/Unified_Parsing/CAMR/Tagging/datasets/v2_6classes/train","/home/cl/ATP/amrlib/amrlib/models/Unified_Parsing/CAMR/Tagging/datasets/v2_6classes/dev")
 #inference_dataset, node_num_list =  load_inference_dataset("/home/cl/ATP/amrlib/amrlib/models/Unified_Parsing/CAMR/Tagging/output_for_relation_classification/output_nodes_align_0805.align_extra_nodes")
 
@@ -182,7 +182,7 @@ def preprocess(examples):
     tokenized_inputs["is_node_start"] = is_node_start
     return tokenized_inputs
 
-tokenized_dataset = dataset.map(preprocess,batched=True)
+# tokenized_dataset = dataset.map(preprocess,batched=True)
 inference_dataset = inference_dataset.map(preprocess,batched=True)
 
 sentence_data_collator = DataCollatorWithPadding(tokenizer=tokenizer,padding=True)
@@ -356,8 +356,8 @@ print(training_args)
 trainer = CAMRRelationTrainer(
     model=model,
     args=training_args,
-    train_dataset=tokenized_dataset["train"],
-    eval_dataset=tokenized_dataset["dev"],
+    train_dataset=inference_dataset,
+    eval_dataset=inference_dataset,
     tokenizer=tokenizer,
     data_collator=full_collator,
     compute_metrics=compute_metrics
