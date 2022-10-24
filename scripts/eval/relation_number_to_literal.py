@@ -1,5 +1,5 @@
 function_words=[]
-with open("/home/cl/ATP/amrlib/amrlib/models/Unified_Parsing/CAMR/Datasets/CAMR_CCL2022/vocabs_0615/ralign.txt","r") as f:
+with open("../../datasets/vocabs/ralign.txt","r") as f:
     for i in f.readlines():
         function_words.append(i.split(" ")[0])
 
@@ -132,10 +132,9 @@ print(sys.argv)
 NODE_FILE=sys.argv[1]
 RELATION_FILE=sys.argv[2]
 OUTPUT=sys.argv[3]
-VOCAB_FILE="/home/cl/ATP/amrlib/amrlib/models/Unified_Parsing/CAMR/Datasets/CAMR_CCL2022/vocabs_0615/relations.txt"
+VOCAB_FILE="../../datasets/vocabs/relations.txt"
 
-#id_copy_path="/home/cl/ATP/amrlib/amrlib/models/Unified_Parsing/CAMR/Tagging/datasets/0811_relation_cls_remove_ralign_nodes_reverse_of_4level/dev.4level.relations.literal"
-id_copy_path="/home/cl/ATP/amrlib/amrlib/models/Unified_Parsing/CAMR/Tagging/test/test_B/test_B.txt"
-#id_copy_path="/home/cl/ATP/amrlib/amrlib/models/Unified_Parsing/CAMR/Tagging/test/test_A/test_A.txt"
+
+id_copy_path="../../test_A/test_A_with_id.txt"
 
 labelsfile_to_relation_old(NODE_FILE,RELATION_FILE,VOCAB_FILE,OUTPUT,id_copy_path)
