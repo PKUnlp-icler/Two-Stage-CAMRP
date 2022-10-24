@@ -1,5 +1,5 @@
 function_words=[]
-with open("/home/cl/ATP/amrlib/amrlib/models/Unified_Parsing/CAMR/Datasets/CAMR_CCL2022/vocabs_0615/ralign.txt","r") as f:
+with open("../../datasets/vocabs/ralign.txt","r") as f:
     for i in f.readlines():
         function_words.append(i.split(" ")[0])
 
