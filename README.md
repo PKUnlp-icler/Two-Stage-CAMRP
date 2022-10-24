@@ -46,6 +46,7 @@ pip install -r requirement.txt # 确保你的torch和cuda版本匹配, 我们使
 你需要把transformers库中的一些文件替换为我们修改后的版本
 - 将 `/miniconda3/envs/camrp/lib/python3.7/site-packages/transformers/models/bert/modeling_bert.py` 换成 `./src/modeling_bert.py`
 - 将 `/miniconda3/envs/camrp/lib/python3.7/site-packages/transformers/modeling_outputs.py` 换成 `./src/modeling_outputs.py`
+- 将 `/miniconda3/envs/camrp/lib/python3.7/site-packages/transformers/trainer.py` 换成  `./src/trainer.py`
 
 
 ### 复现论文中的结果
