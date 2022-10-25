@@ -14,7 +14,7 @@ python extra_nodes_tag_to_label.py $EXTRA_PATH $OUTPUT_PREFIX.no_r $OUTPUT_PREFI
 python extra_nodes_tag_to_label.py $EXTRA_PATH $OUTPUT_PREFIX.with_r $OUTPUT_PREFIX.with_r.with_extra
 
 python inference_relation_cls.py $RELATION_CLS_PATH $OUTPUT_PREFIX.with_r.with_extra 
-python inference_relation_alignment_cls.py $RELATION_ALIGN_CLS_PATH $RELATION_ALIGN_CLS_PATH $OUTPUT_PREFIX.with_r.with_extra
+python inference_relation_alignment_cls.py $RELATION_ALIGN_CLS_PATH $OUTPUT_PREFIX.with_r.with_extra
 
 
 python relation_number_to_literal.py $OUTPUT_PREFIX.with_r.with_extra $OUTPUT_PREFIX.with_r.with_extra.ralign $OUTPUT_PREFIX.with_r.with_extra.ralign.literal
