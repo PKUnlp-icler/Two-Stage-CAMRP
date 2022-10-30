@@ -180,7 +180,7 @@ After downloading, the data sturcture should be like:
     ├─relation_cls
     │  └─checkpoint-32400
     └─surface_tagging
-        └─checkpoint-200
+        └─checkpoint-125200
 ```
 
 
