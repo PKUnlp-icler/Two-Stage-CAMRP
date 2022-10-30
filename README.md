@@ -180,7 +180,7 @@ python train_relation_alignment_classification.py
     ├─relation_cls
     │  └─checkpoint-32400
     └─surface_tagging
-        └─checkpoint-200
+        └─checkpoint-125200
 ```
 
 
