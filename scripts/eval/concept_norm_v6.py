@@ -15,7 +15,7 @@ CN_UNIT = {
         '亿': 100000000, '億': 100000000, '兆': 1000000000000
 }
 
-def get_camr_dict(path='/home/cl/ATP/amrlib/amrlib/models/Unified_Parsing/CAMR/Datasets/CAMR_CCL2022/Test/Chinese-AMR-main/tools/camr_pred_dict.xls'):
+def get_camr_dict(path='../../Chinese-AMR/tools/camr_pred_dict.xls'):
     df = pd.read_excel(path, header=None, dtype=str,  keep_default_na=False)
     camr_dict = {}
     concept_list = []
