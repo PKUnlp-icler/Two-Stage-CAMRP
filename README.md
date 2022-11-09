@@ -51,7 +51,7 @@ pip install -r requirement.txt # 确保你的torch和cuda版本匹配, 我们使
 
 ### 复现论文中的结果
 
-如果想要复现论文中的结果，可以直接跳转到 ''[推理](https://github.com/chenllliang/Two-Stage-CAMRP/blob/main/README.md#%E6%8E%A8%E7%90%86)'' 部分(不需要数据集准备、预处理和训练)
+如果想要复现论文中的结果，可以直接跳转到 ''[推理](https://github.com/PKUnlp-icler/Two-Stage-CAMRP/blob/main/README.md#%E6%8E%A8%E7%90%86)'' 部分(不需要数据集准备、预处理和训练)
 
 
 ## 📕数据集准备
