@@ -165,7 +165,7 @@ python train_relation_alignment_classification.py
 
 ## 📕推理
 
-要复现我们的结果，你需要下载五个模型，从 [Google Drive](https://drive.google.com/drive/folders/1zkWlgyVYvoZTcXzZsC4GABFRKXHr9pUa?usp=sharing) 或者[北大网盘](https://disk.pku.edu.cn:443/link/B9082FEBBE8AF0210486969549C65D52) 或者 [阿里云盘](https://www.aliyundrive.com/s/ad1VTLhUBgy) 或者通过上面的脚本进行训练. 在得到五个模型后，将模型的文件夹们放到 `./models/trained_models` 中. 
+要复现我们的结果，你需要下载五个模型，从 [Google Drive](https://drive.google.com/drive/folders/1zkWlgyVYvoZTcXzZsC4GABFRKXHr9pUa?usp=sharing) 或者[北大网盘](https://disk.pku.edu.cn:443/link/B9082FEBBE8AF0210486969549C65D52) 或者 [阿里云盘（暂时不可用）](https://www.aliyundrive.com/s/ad1VTLhUBgy) 或者通过上面的脚本进行训练. 在得到五个模型后，将模型的文件夹们放到 `./models/trained_models` 中. 
 
 下载完后，数据结构应该如下
 ```bash
