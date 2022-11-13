@@ -194,7 +194,7 @@ cd scripts/eval
 
 python inference_surface_tagging.py ../../models/trained_models/surface_tagging/checkpoint-125200 ../../test_A/test_A_with_id.txt ../../result/testA
 
-python inference_normalization_tagging.py ../../models/normalization_tagging/checkpoint-650 ../../test_A/test_A_with_id.txt ../../result/testA
+python inference_normalization_tagging.py ../../models/trained_models/normalization_tagging/checkpoint-650 ../../test_A/test_A_with_id.txt ../../result/testA
 
 python inference_non_aligned_tagging.py ../../models/trained_models/non_aligned_tagging/checkpoint-1400 ../../test_A/test_A_with_id.txt ../../result/testA
 
