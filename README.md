@@ -4,6 +4,8 @@
 
 论文 "[A Two-Stage Method for Chinese AMR Parsing](https://arxiv.org/abs/2209.14512)" @ CAMRP-2022 & CCL-2022 的模型及训练代码。
 
+这里有一份讲解PPT可以参考[CCL-2022](https://drive.google.com/file/d/1wrqXTRL2z95LKqcGOdPSj2YLFBdEdtdw/view?usp=share_link)
+
 
 我们的系统 "PKU@CAMRP-2022" 在 [CAMRP-2022](https://github.com/GoThereGit/Chinese-AMR#%E8%AF%84%E6%B5%8B%E6%8E%92%E5%90%8D) 评测中赢得了第二名
 
