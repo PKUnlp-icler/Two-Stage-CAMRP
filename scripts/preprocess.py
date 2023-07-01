@@ -739,6 +739,127 @@ def get_input(input_file,out_put_file_sent,out_put_file_wid):
     out_sent.close()
     out_wid.close()
 
+def construct_clean_dict(dict_path, nodes_path, clean_path):
+    en_list = []
+    with open(dict_path) as f:
+        for line in f.readlines():
+            en_list.append(line[:-1])
+
+    with open(nodes_path) as f:
+        nodes = f.read()
+    
+    en_dict = {}
+    label_cnt = 1
+    #f = open(clean_path, 'w')
+    for i in en_list:
+        count = nodes.count(' '+i) + nodes.count(i+' ')
+        if count >= 10:
+            en_dict[i] = label_cnt
+            label_cnt += 1
+            #f.writelines(i + '\n')
+    return en_dict
+
+
+def load_dict(dict_path):
+    en_dict = {}
+    with open(dict_path) as f:
+        for i, line in enumerate(f.readlines()):
+            en_dict[line[:-1]] = i+1
+    return en_dict
+    
+
+def load_tuples(tuples_path):
+    tuples = []
+    with open(tuples_path) as f:
+        lines = f.readlines()
+    
+    tuple_sent = []
+    line_dict = {}
+    for line in lines[3:]:
+        if line == '\n':
+            tuples.append(tuple_sent)
+            tuple_sent = []
+            continue
+        
+        line_dict['节点编号1'] = line[:-1].split('\t')[1]
+        line_dict['概念1'] = line[:-1].split('\t')[2]
+        line_dict['节点编号2'] = line[:-1].split('\t')[7]
+        line_dict['概念2'] = line[:-1].split('\t')[8]
+
+        tuple_sent.append(line_dict.copy())
+
+    return tuples
+
+def find_pos(special_idx, tuples_line, sentence_len):
+    pos = special_idx
+    while(pos > sentence_len):
+        next_hop_list = []
+        for tuple_dict in tuples_line:
+            if(int(tuple_dict['节点编号1'].split('_')[0][1:]) == pos):
+                next_hop_list.append(int(tuple_dict['节点编号2'].split('_')[0][1:]))
+        try:
+            pos = min(next_hop_list)
+        except:
+            return -1
+    return pos
+
+
+def construct_tag_files(sent_path, en_dict, tuples, out_path):
+    with open(sent_path) as f:
+        sentences = f.readlines()
+
+    f = open(out_path, 'w')
+
+    line_num = 0
+    for sentence in sentences:
+        sentence_lst = sentence.strip().split()
+        sentence_len = len(sentence_lst)
+        tags = [0 for i in range(sentence_len)]
+        
+        tag_idx = [] # 保证每个非对齐概念被触发一次
+        special_idxs = []
+        for tuple_dict in tuples[line_num]:
+            cur_idx = int(tuple_dict['节点编号1'].split('_')[0][1:])
+            if cur_idx > sentence_len and cur_idx not in tag_idx:
+                try:
+                    tag = en_dict[tuple_dict['概念1']]
+                except:
+                    continue
+
+                assert type(tag) == int
+
+                ans = []
+                for t in tuples[line_num]:
+                    if cur_idx == int(t['节点编号1'].split('_')[0][1:]):
+                        for i in t['节点编号2'].split('_'):
+                            if i[0] == 'x' and int(i[1:]) <= sentence_len:
+                                ans.append(int(i[1:]) - 1)
+                
+                tag_flag = False
+                if ans != []:
+                    for i in sorted(ans, reverse=True):
+                        if tags[i] == 0:
+                            tags[i] = tag
+                            tag_idx.append(cur_idx)
+                            tag_flag = True
+                            break                   
+                if tag_flag == False:
+                    special_idxs.append((cur_idx, tag))
+                    tag_idx.append(cur_idx)
+
+        for i,t in special_idxs:
+            pos = find_pos(i, tuples[line_num], sentence_len) - 1
+            if pos < 0:
+                continue
+            for l in range(sentence_len - pos):
+                if tags[l+pos] == 0:
+                    tags[l+pos] = t
+                    break
+
+        f.writelines(' '.join([str(i) for i in tags]) + '\n')
+        line_num += 1
+
+    return
 
 LENGTH_FILE="../Chinese-AMR-main/tools/max_len.txt"
 dev_t_list = load_tuple_file("../datasets/camr_tuples/tuples_dev.txt")
@@ -776,7 +897,18 @@ write_tagging_dataset_concept_norm(train_grouped_t,train_wid_list,LENGTH_FILE,".
 
 
 # Non-aligned Tagging
-# We have provided the tags under the folder "../datasets/non_aligned_tagging".
+# We have provided the tags under the folder "../preprocessed/non_aligned_tagging". You can run the following code after downloading the original data.
+# We added 'preprocessed/non_aligned_concept_tagging/train.tag.extra_nodes_dict.clean' for Non-aligned tagging, the difference is trivial with the original extra_nodes_dict.
+clean_en_dict = load_dict('../preprocessed/non_aligned_concept_tagging/train.tag.extra_nodes_dict')
+train_tuples = load_tuples('../datasets/camr_tuples/tuples_train.txt')
+construct_tag_files('../datasets/camr_tuples/temp/train.sent', \
+    clean_en_dict, train_tuples, '../preprocessed/non_aligned_concept_tagging/train.extra_nodes.tag')
+
+
+# construct validation set
+dev_tuples = load_tuples('../datasets/camr_tuples/tuples_dev.txt')
+construct_tag_files('../datasets/camr_tuples/temp/dev.sent', \
+    clean_en_dict, dev_tuples, '../preprocessed/non_aligned_concept_tagging/dev.extra_nodes.tag')
 
 # Relation Classification
 write_4_level_relation_classification_dataset(dev_grouped_t,dev_wid_list,"../datasets/vocabs/relations.txt",LENGTH_FILE,"../preprocessed/relation_classification/dev")
