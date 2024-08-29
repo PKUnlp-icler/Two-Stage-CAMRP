@@ -221,6 +221,26 @@ python Align-smatch.py -lf ../data/test/test_A/max_len_testA.txt -f ../../result
 ## 📕引用我们的工作
 
 ```
+@article{陈亮:18,
+author = {陈亮},
+author = {高博飞},
+author = {常宝宝},
+author = {张亦驰},
+title = {基于概念预测和关系预测的AMR解析与对齐方法},
+publisher = {中文信息学报},
+year = {2024},
+journal = {中文信息学报},
+volume = {38},
+number = {7},
+eid = {18},
+pages = {18-30},
+keywords = {语义解析|抽象语义表示|中文自然语言处理},
+url = {http://jcip.cipsc.org.cn/CN/Y2024/V38/I7/18},
+doi = {null},
+}
+
+
+
 @misc{Chen2022ATM,
   title={A Two-Stage Method for Chinese AMR Parsing},
   author={Liang Chen and Bofei Gao and Baobao Chang},
